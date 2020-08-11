@@ -15,7 +15,11 @@ body {
   cursor: pointer;
 }
 
-  
-  /* #title {
-  
-  }*/
+.form,
+.greetings {
+  display: none;
+}
+
+.showing {
+  display: block;
+}
