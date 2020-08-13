@@ -4,7 +4,22 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
   const TODOS_LS = "toDos";
   
-  const toDos = [];
+  let toDos = [];
+
+  function deleteToDo(event) {
+    // console.dir(event.target); 이 값을 통해 할 수 있는 모든 액션을 찾을 수 있다.
+    // console.log(event.target.parentNode); 부모 DOM에 접근하는 법.
+
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    const cleanTodos = toDos.filter(function(toDo) {
+      return toDo.id !== parseInt(li.id);
+    });
+    console.log(cleanTodos);
+    toDos = cleanTodos;
+    saveToDos();
+  }
 
   function saveToDos() {
     localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
@@ -16,6 +31,7 @@ const toDoForm = document.querySelector(".js-toDoForm"),
     const span = document.createElement("span");
     const newId = toDos.length + 1;
     delBtn.innerText = "❌";
+    delBtn.addEventListener("click", deleteToDo);
     span.innerText = text;
     li.appendChild(delBtn);
     li.appendChild(span);
