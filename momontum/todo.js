@@ -36,9 +36,10 @@ const toDoForm = document.querySelector(".js-toDoForm"),
     li.appendChild(delBtn);
     li.appendChild(span);
     li.id = newId;
+    li.classList.add(SHOWING_CN);
     toDoList.appendChild(li);
     const toDoObj = {
-      text: text,
+      text,
       id: newId
     };
     toDos.push(toDoObj);
@@ -54,7 +55,7 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
   function loadToDos() {
     const loadedToDos = localStorage.getItem(TODOS_LS);
-    if (toDos !== null) {
+    if (loadedToDos !== null) {
       const parsedToDos = JSON.parse(loadedToDos);
       parsedToDos.forEach((toDo) => {
         paintToDo(toDo.text);
@@ -64,6 +65,7 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
   function init() {
     loadToDos();
+    toDoForm.classList.add(SHOWING_CN);
     toDoForm.addEventListener("submit", handleSubmit);
   }
 
